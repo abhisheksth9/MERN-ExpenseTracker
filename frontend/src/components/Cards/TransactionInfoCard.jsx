@@ -23,9 +23,9 @@ const TransactionInfoCard = ({
       : "bg-red-50 text-red-500";
   };
 
-  const formattedAmount = new Intl.NumberFormat("en-US", {
+  const formattedAmount = new Intl.NumberFormat("en-IN", {
     style: "currency",
-    currency: "USD",
+    currency: "Nrs",
   }).format(amount);
 
   return (
