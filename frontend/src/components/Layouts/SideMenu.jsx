@@ -8,7 +8,7 @@ const SideMenu = ({ activeMenu, closeSidebar }) => {
   const navigate = useNavigate();
 
   const handleClick = (route) => {
-    if (route === "logout") {
+    if (route === "/logout") {
       localStorage.clear();
       clearUser();
       navigate("/signin");

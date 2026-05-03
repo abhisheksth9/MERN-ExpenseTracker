@@ -10,6 +10,7 @@ import Income from "./pages/Dashboard/Income";
 import Expense from "./pages/Dashboard/Expense";
 import Authentication from "./pages/Auth/Authentication";
 import UserProvider from "./context/userContext";
+import Toaster from "react-hot-toast"
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Router>
           <Routes>
             <Route path="/" element={<Root />}/>
+            <Route path="/login" element={<Authentication/>} />
             <Route path="/signin" element={<Authentication/>} />
             <Route path="/signup" element={<Authentication/>} />
             <Route path="/dashboard" element={<Home/>} />
@@ -26,6 +28,14 @@ const App = () => {
           </Routes>
         </Router>
       </div>
+      <Toaster
+        toastOptions={{
+          className:"",
+          style: {
+            fontSize: '13px'
+          },
+        }}
+      />
     </UserProvider>
   )
 }

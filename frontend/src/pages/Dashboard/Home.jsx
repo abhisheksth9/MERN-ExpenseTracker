@@ -15,6 +15,7 @@ import FinanceOverview from "../../components/Dashboard/FinanceOverview";
 import ExpenseTransactions from "../../components/Dashboard/ExpenseTransactions";
 import Last30DaysExpenses from "../../components/Dashboard/Last30DaysExpenses";
 import RecentIncomeWithChart from "../../components/Dashboard/RecentIncomeWithChart";
+import RecentIncome from "../../components/Dashboard/RecentIncome";
 
 import { LuHandCoins, LuWalletMinimal } from "react-icons/lu";
 import { IoMdCard } from "react-icons/io";
@@ -28,6 +29,8 @@ const Home = () => {
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  console.log("Full dashboard data:", dashboardData);
 
   const fetchDashboardData = async () => {
     if (loading) return;
@@ -54,12 +57,10 @@ const Home = () => {
   useEffect(() => {
     fetchDashboardData();
   }, []);
-  console.log('1')
-  console.log("Dashboard Data:", dashboardData);
-  console.log('12')
-  console.log("Last 30 Days:", dashboardData?.last30DaysExpenses);
-  console.log('13')
-  console.log("Transactions:", dashboardData?.last30DaysExpenses?.transactions);
+  // console.log("Dashboard Data:", dashboardData);
+  // console.log("Last 30 Days:", dashboardData?.last30DaysExpenses);
+  // console.log("Transactions:", dashboardData?.last30DaysExpenses?.transactions);
+  // console.log("a")
 
   return (
     <DashboardLayout activeMenu="dashboard">
@@ -125,6 +126,11 @@ const Home = () => {
                 dashboardData?.last60DaysIncome?.transactions?.slice(0, 4) || []
               }
               totalIncome={dashboardData?.totalIncome || 0}
+            />
+
+            <RecentIncome 
+              transactions={dashboardData?.last60DaysIncome?.transactions || []}
+              onSeeMore={() => navigate("/income")}
             />
           </div>
         </div>

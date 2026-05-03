@@ -19,7 +19,7 @@ const RecentTransactions = ({ transactions = [], onSeeMore }) => {
           <p className="text-sm text-gray-400">No transactions found</p>
         )}
 
-        {transactions.slice(0, 5).map((item, index) => (
+        {transactions.slice(0, 4).map((item, index) => (
           <TransactionInfoCard
             key={item._id || index}
             title={
