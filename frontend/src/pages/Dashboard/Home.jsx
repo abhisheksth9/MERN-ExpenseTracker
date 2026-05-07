@@ -2,13 +2,10 @@ import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../context/userContext";
 import { useUserAuth } from "../../hooks/useUserAuth";
 import { useNavigate } from "react-router-dom";
-
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPath";
 import { addThousandsSeperator } from "../../utils/helper";
-
 import DashboardLayout from "../../components/Layouts/DashboardLayout";
-
 import InfoCard from "../../components/Cards/InfoCard";
 import RecentTransactions from "../../components/Dashboard/RecentTransactions";
 import FinanceOverview from "../../components/Dashboard/FinanceOverview";
@@ -29,8 +26,6 @@ const Home = () => {
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  console.log("Full dashboard data:", dashboardData);
 
   const fetchDashboardData = async () => {
     if (loading) return;
@@ -57,10 +52,6 @@ const Home = () => {
   useEffect(() => {
     fetchDashboardData();
   }, []);
-  // console.log("Dashboard Data:", dashboardData);
-  // console.log("Last 30 Days:", dashboardData?.last30DaysExpenses);
-  // console.log("Transactions:", dashboardData?.last30DaysExpenses?.transactions);
-  // console.log("a")
 
   return (
     <DashboardLayout activeMenu="dashboard">
@@ -94,31 +85,11 @@ const Home = () => {
             />
           </div>
 
-          {/* Dashboard Sections */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-
-            <RecentTransactions
-              transactions={dashboardData?.recentTransactions || []}
-              onSeeMore={() => navigate("/expense")}
-            />
-
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
             <FinanceOverview
               totalBalance={dashboardData?.totalBalance || 0}
               totalIncome={dashboardData?.totalIncome || 0}
               totalExpense={dashboardData?.totalExpense || 0}
-            />
-
-            <ExpenseTransactions
-              transactions={
-                dashboardData?.last30DaysExpense?.transactions || []
-              }
-              onSeeMore={() => navigate("/expense")}
-            />
-
-            <Last30DaysExpenses
-              data={
-                dashboardData?.last30DaysExpense?.transactions || []
-              }
             />
 
             <RecentIncomeWithChart
@@ -128,9 +99,27 @@ const Home = () => {
               totalIncome={dashboardData?.totalIncome || 0}
             />
 
+            <Last30DaysExpenses
+              data={
+                dashboardData?.last30DaysExpense?.transactions || []
+              }
+            />
+
+            <RecentTransactions
+              transactions={dashboardData?.recentTransactions || []}
+              onSeeMore={() => navigate("/expense")}
+            />
+
             <RecentIncome 
               transactions={dashboardData?.last60DaysIncome?.transactions || []}
               onSeeMore={() => navigate("/income")}
+            />
+
+            <ExpenseTransactions
+              transactions={
+                dashboardData?.last30DaysExpense?.transactions || []
+              }
+              onSeeMore={() => navigate("/expense")}
             />
           </div>
         </div>

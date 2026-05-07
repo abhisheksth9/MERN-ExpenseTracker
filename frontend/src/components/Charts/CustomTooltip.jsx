@@ -13,7 +13,7 @@ const CustomTooltip = ({ active, payload }) => {
       <p className="text-sm text-gray-600">
         Amount:{" "}
         <span className="font-semibold text-gray-900">
-          ${amount.toLocaleString()}
+          Rs {amount.toLocaleString()}
         </span>
       </p>
     </div>

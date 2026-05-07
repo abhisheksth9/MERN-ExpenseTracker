@@ -128,7 +128,7 @@ const Expense = () => {
           <div className=''>
             <ExpenseOverview
               transactions={expenseData}
-              onExpenseIncome={() => setOpenAddExpenseModal(true)}
+              onAddExpense={() => setOpenAddExpenseModal(true)}
             />
           </div>
 

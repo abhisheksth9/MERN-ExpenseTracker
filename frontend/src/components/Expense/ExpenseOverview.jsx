@@ -2,43 +2,59 @@ import { useEffect, useState } from "react";
 import { LuPlus } from "react-icons/lu";
 import CustomLineChart from "../Charts/CustomLineChart";
 import { prepareExpenseLineChartData } from "../../utils/helper";
+import getDateRange from "../../utils/dateFilter";
 
-const ExpenseOverview = ({ transactions = [], onExpenseIncome }) => {
+const ExpenseOverview = ({ transactions, onAddExpense }) => {
   const [chartData, setChartData] = useState([]);
+  const [range, setRange] = useState("monthly");
 
   useEffect(() => {
-    const result = prepareExpenseLineChartData(transactions);
-    setChartData(result || []);
-  }, [transactions]);
+    const { start, end } = getDateRange(range);
 
-  return (
-    <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
-      <div className="flex items-center justify-between">
-        <div>
-          <h5 className="text-lg font-semibold text-gray-800">
-            Expense Overview
-          </h5>
-          <p className="text-sm text-gray-500">
-            Track your spending trends over time
-          </p>
+    const filtered = transactions.filter((t) => {
+      const date = new Date(t.date);
+      return date >= start && date <= end;
+    });
+
+    const result = prepareExpenseLineChartData(filtered, range);
+    setChartData(result);
+  }, [transactions, range]);
+
+  return ( 
+      <div className='card'> 
+        <div className='flex items-center justify-between'> 
+          <div> 
+            <h5 className='text-lg'>Expense Overview</h5> 
+            <p className='text-ls text-gray-400 mt-0.5'>Track earning and analyze</p> 
+          </div> 
+        <div className="flex items-center gap-3"> 
+          <select 
+            value={range} 
+            onChange={(e) => setRange(e.target.value)} 
+            className="add-btn"> 
+            <option value="daily">Daily</option> 
+            <option value="weekly">Weekly</option> 
+            <option value="monthly">Monthly</option> 
+            <option value="yearly">Yearly</option> 
+          </select> 
+          
+          <button 
+            className="add-btn flex items-center gap-1" 
+            onClick={onAddExpense} > 
+            <LuPlus className="text-lg" /> Add Expense 
+          </button>
         </div>
-
-        <button
-          onClick={onExpenseIncome}
-          className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition"
-        >
-          <LuPlus className="text-lg" />
-          Add Expense
-        </button>
-
-      </div>
-
-      <div className="mt-8">
-        <CustomLineChart data={chartData} />
-      </div>
-
-    </div>
-  );
-};
+      </div> 
+      <div className="mt-8"> 
+        {chartData.length > 0 ? ( 
+          <CustomLineChart data={chartData} /> 
+        ) : ( 
+        <p className="text-center text-gray-400 text-sm py-10"> 
+        No expense data available for this period 
+        </p> 
+        )} 
+      </div> 
+    </div> 
+) } 
 
 export default ExpenseOverview;
