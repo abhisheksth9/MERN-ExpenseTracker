@@ -17,7 +17,7 @@ const AddExpenseForm = ({ onAddExpense }) => {
   return (
     <div className="bg-white shadow-2xl rounded-3xl p-5 border border-gray-100">
       <div className="mb-4">
-        {/* Add Description Section */}
+
         <Input
           value={expense.description}
           onChange={({ target }) =>
@@ -29,7 +29,6 @@ const AddExpenseForm = ({ onAddExpense }) => {
         />
       </div>
 
-        {/* Expense Category */}
         <div className="mb-4">
           <label className="text-[13px] text-slate-800 block text-sm text-gray-700 mb-2">
             Expense Category
@@ -81,11 +80,8 @@ const AddExpenseForm = ({ onAddExpense }) => {
             />
           </div>
         </div>
-      {/* </div> */}
 
-      {/* Preview Card */}
-      <div className="mt-6 bg-gradient-to-r from-violet-500 to-purple-600 text-white rounded-2xl p-5 shadow-lg">
-
+      <div className="mt-6 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-2xl p-5 shadow-lg">
         <p className="text-sm opacity-80">
           Expense Preview
         </p>
@@ -109,7 +105,7 @@ const AddExpenseForm = ({ onAddExpense }) => {
         <button
           type="button"
           onClick={() => onAddExpense(expense)}
-          className="bg-gradient-to-r from-violet-600 to-purple-600 hover:scale-105 hover:shadow-xl transition-all duration-300 text-white font-semibold px-8 py-3 rounded-2xl">
+          className="bg-gradient-to-r from-purple-500 to-purple-600 hover:scale-105 hover:shadow-xl transition-all duration-300 text-white font-semibold px-8 py-3 rounded-2xl">
           + Add Expense
         </button>
       </div>

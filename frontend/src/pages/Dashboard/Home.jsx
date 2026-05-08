@@ -13,7 +13,6 @@ import ExpenseTransactions from "../../components/Dashboard/ExpenseTransactions"
 import Last30DaysExpenses from "../../components/Dashboard/Last30DaysExpenses";
 import RecentIncomeWithChart from "../../components/Dashboard/RecentIncomeWithChart";
 import RecentIncome from "../../components/Dashboard/RecentIncome";
-
 import { LuHandCoins, LuWalletMinimal } from "react-icons/lu";
 import { IoMdCard } from "react-icons/io";
 
@@ -61,7 +60,6 @@ const Home = () => {
       {!loading && !error && (
         <div className="my-5 mx-auto">
 
-          {/* Info Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <InfoCard
               icon={<IoMdCard />}

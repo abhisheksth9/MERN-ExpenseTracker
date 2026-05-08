@@ -8,7 +8,7 @@ const getDateRange = (range) => {
       break;
 
     case "weekly": {
-      const today = new Date(); // 👈 NEW object
+      const today = new Date();
       const day = today.getDay();
       const diff = today.getDate() - day;
 

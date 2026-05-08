@@ -7,25 +7,39 @@ const RecentIncomeWithChart = ({ data = [], totalIncome = 0 }) => {
   const [chartData, setChartData] = useState([]);
 
   const prepareChartData = () => {
-    const dataArr = data?.map((item) => ({
-      name: item?.source,
-      amount: item?.amount,
-    }));
+    const groupedData = data.reduce((acc, item) => {
+      const category = item?.category || 'Other';
 
-    setChartData(dataArr);
+      if (!acc[category]) {
+        acc[category] = 0;
+      }
+
+      acc[category] += Number(item?.amount || 0);
+
+      return acc;
+    }, {});
+
+    const formattedData = Object.entries(groupedData).map(
+      ([category, amount]) => ({
+        name: category,
+        amount,
+      })
+    );
+
+    setChartData(formattedData);
   };
 
   useEffect(() => {
     prepareChartData();
   }, [data]);
 
-  const highestIncomeSource = useMemo(() => {
-    if (!data.length) return null;
+  const highestIncomeCategory = useMemo(() => {
+    if (!chartData.length) return null;
 
-    return data.reduce((max, item) =>
+    return chartData.reduce((max, item) =>
       item.amount > max.amount ? item : max
     );
-  }, [data]);
+  }, [chartData]);
 
   if (!chartData.length) {
     return (
@@ -48,7 +62,6 @@ const RecentIncomeWithChart = ({ data = [], totalIncome = 0 }) => {
   return (
     <div className="card p-6 rounded-2xl shadow-sm border border-gray-100 bg-white">
 
-      {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
           <h5 className="text-xl font-bold text-gray-800">
@@ -56,7 +69,7 @@ const RecentIncomeWithChart = ({ data = [], totalIncome = 0 }) => {
           </h5>
 
           <p className="text-sm text-gray-500 mt-1">
-            Breakdown of your recent income sources
+            Breakdown of recent income categories
           </p>
         </div>
 
@@ -73,22 +86,22 @@ const RecentIncomeWithChart = ({ data = [], totalIncome = 0 }) => {
 
       <div className="grid grid-cols-2 gap-4 mb-6">        
         <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
-          <p className="text-sm text-gray-500">Income Sources</p>
+          <p className="text-sm text-gray-500">Income Categories</p>
 
           <h3 className="text-2xl font-bold text-gray-800">
-            {data.length}
+            {chartData.length}
           </h3>
         </div>
 
         <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
-          <p className="text-sm text-gray-500">Highest Source</p>
+          <p className="text-sm text-gray-500">Highest Category</p>
 
           <h3 className="text-md font-bold text-green-600 truncate">
-            {highestIncomeSource?.source}
+            {highestIncomeCategory?.name}
           </h3>
 
           <p className="text-sm text-gray-500 mt-1">
-            Rs {highestIncomeSource?.amount?.toLocaleString()}
+            Rs {highestIncomeCategory?.amount?.toLocaleString()}
           </p>
         </div>
       </div>
@@ -97,7 +110,7 @@ const RecentIncomeWithChart = ({ data = [], totalIncome = 0 }) => {
         <CustomPieChart
           data={chartData}
           label="Total Income"
-          totalAmount={`NRP ${Number(totalIncome).toLocaleString()}`}
+          totalAmount={`Rs ${Number(totalIncome).toLocaleString()}`}
           showTextAnchor
           colors={COLORS}
         />

@@ -26,33 +26,12 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
     (response) => {
         return response;
-    }, 
+    },
     (error) => {
         if (error.response) {
             if (error.response.status === 401) {
                 window.location.href = "/login";
-            } else if (error.response.status === 500){
-                console.error("Server Error. Try again")
-            }
-        } else if (error.code === "ECONNABORTED") {
-            console.error("Request Timeout. Please Try again")
-        }
-        return Promise.reject(error);
-    }
-);
-
-axiosInstance.interceptors.response.use(
-    (response) => {
-        return response;
-    }, 
-    (error) => {
-        if (error.response) {
-
-            if (error.response.status === 401) {
-            window.location.href = "/login";
-            }
-
-            if (error.response.status === 500){
+            }else if (error.response.status === 500) {
                 console.error("Server Error. Try again");
             }
         } else if (error.code === "ECONNABORTED") {

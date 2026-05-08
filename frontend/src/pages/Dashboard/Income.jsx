@@ -11,7 +11,6 @@ import DeleteAlert from "../../components/DeleteAlert";
 import { useUserAuth } from "../../hooks/useUserAuth";
 
 const Income = () => {
-
   useUserAuth();
 
   const [incomeData, setIncomeData] = useState([])
@@ -43,7 +42,7 @@ const Income = () => {
   }
 
   const handleAddIncome = async (income) => {
-    const {source, amount, date, icon} = income;
+    const {source,category,amount, date, icon} = income;
 
     if (!source.trim()){
       toast.error("Source is required.");
@@ -63,6 +62,7 @@ const Income = () => {
     try {
       await axiosInstance.post(API_PATHS.INCOME.ADD_INCOME, {
         source,
+        category,
         amount,
         date,
         icon,

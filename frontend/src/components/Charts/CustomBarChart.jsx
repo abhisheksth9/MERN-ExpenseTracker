@@ -9,6 +9,7 @@ import {
   ResponsiveContainer,
   Cell,
 } from "recharts";
+
 import CustomTooltip from "./CustomTooltip";
 
 const COLORS = ["#875cf5", "#cfbefb"];
@@ -27,8 +28,8 @@ const CustomBarChart = ({ data = [] }) => {
   }
 
   return (
-    <div className="w-full h-[300px] min-h-[300px]">
-      <ResponsiveContainer width="100%" height="100%">
+    <div className="w-full min-w-0 h-[300px]">
+      <ResponsiveContainer width="100%" height={300}>
         <BarChart
           data={chartData}
           margin={{ top: 20, right: 20, left: 10, bottom: 10 }}

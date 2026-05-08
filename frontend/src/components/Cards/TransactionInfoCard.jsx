@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  LuUtensils,
   LuTrendingUp,
   LuTrendingDown,
   LuTrash2,
@@ -8,7 +7,6 @@ import {
 
 const TransactionInfoCard = ({
   title,
-  icon,
   date,
   amount = 0,
   type = "expense",
@@ -25,22 +23,23 @@ const TransactionInfoCard = ({
 
   const formattedAmount = new Intl.NumberFormat("en-IN", {
     style: "currency",
-    currency: "Nrs",
+    currency: "NPR",
   }).format(amount);
 
   return (
     <div className="group relative flex items-center gap-4 mt-2 p-3 rounded-lg hover:bg-gray-100/60 transition-colors">
 
-      <div className="w-12 h-12 flex items-center justify-center text-xl text-gray-800 bg-gray-100 rounded-full">
-        {icon ? (
-          React.createElement(icon)   // ✅ render icon component
-        ) : (
-          <LuUtensils />
-        )}
+      <div
+        className={`w-12 h-12 flex items-center justify-center text-xl rounded-full ${
+          isIncome
+            ? "bg-green-100 text-green-600"
+            : "bg-red-100 text-red-600"
+        }`}
+      >
+        {isIncome ? <LuTrendingUp /> : <LuTrendingDown />}
       </div>
-      
+
       <div className="flex-1 flex items-center justify-between">
-        
         <div>
           <p className="text-sm text-gray-700 font-medium">{title}</p>
           <p className="text-xs text-gray-400 mt-1">{date}</p>
@@ -62,7 +61,6 @@ const TransactionInfoCard = ({
           <h6 className="text-xs font-medium">
             {isIncome ? "+" : "-"} {formattedAmount}
           </h6>
-          {isIncome ? <LuTrendingUp /> : <LuTrendingDown />}
         </div>
       </div>
     </div>

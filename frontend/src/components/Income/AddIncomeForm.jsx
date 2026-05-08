@@ -76,7 +76,7 @@ const AddIncomeForm = ({ onAddIncome }) => {
         </div>
       </div>
 
-      <div className="mt-6 bg-gradient-to-r from-violet-500 to-purple-600 text-white rounded-2xl p-5 shadow-lg">
+      <div className="mt-6 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-2xl p-5 shadow-lg">
         <p className="text-sm opacity-80">Income Preview</p>
 
         <h3 className="text-xl font-bold mt-1">
@@ -98,7 +98,7 @@ const AddIncomeForm = ({ onAddIncome }) => {
         <button
           type="button"
           onClick={() => onAddIncome(income)}
-          className="bg-gradient-to-r from-violet-600 to-purple-600 hover:scale-105 hover:shadow-xl transition-all duration-300 text-white font-semibold px-8 py-3 rounded-2xl"
+          className="bg-gradient-to-r from-purple-500 to-purple-600 hover:scale-105 hover:shadow-xl transition-all duration-300 text-white font-semibold px-8 py-3 rounded-2xl"
         >
           + Add Income
         </button>

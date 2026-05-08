@@ -15,7 +15,6 @@ const SignIn = () => {
 
   const navigate = useNavigate();
 
-  // Handle SignIn Form Submit
   const handleSignIn = async (e) => {
     e.preventDefault();
 
@@ -31,7 +30,6 @@ const SignIn = () => {
 
     setError("");
 
-    //Login API Call
     try {
       const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
         email,

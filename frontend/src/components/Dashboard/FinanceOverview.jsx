@@ -1,18 +1,23 @@
 import CustomPieChart from "../Charts/CustomPieChart";
 
-const COLORS = [
-  "#EF4444",
-  "#22C55E",
-];
+const COLORS = ["#EF4444", "#22C55E"];
 
 const FinanceOverview = ({
   totalIncome,
   totalExpense,
 }) => {
-  const savings = Math.max(totalIncome - totalExpense, 0);
-  const savingsRate = totalIncome > 0
-    ? ((savings / totalIncome) * 100).toFixed(1)
-    : 0;
+  const savings = Math.max(
+    totalIncome - totalExpense,
+    0
+  );
+
+  const savingsRate =
+    totalIncome > 0
+      ? ((savings / totalIncome) * 100).toFixed(1)
+      : 0;
+
+  const hasTransactions =
+    totalIncome > 0 || totalExpense > 0;
 
   const overviewData = [
     {
@@ -26,14 +31,33 @@ const FinanceOverview = ({
   ];
 
   const legendItems = [
-    { label: "Expenses", color: "bg-red-500" },
-    { label: "Savings", color: "bg-green-500" },
+    {
+      label: "Expenses",
+      color: "bg-red-500",
+    },
+    {
+      label: "Savings",
+      color: "bg-green-500",
+    },
   ];
+
+  if (!hasTransactions) {
+    return (
+      <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 flex flex-col justify-top items-center text-center">
+        <h2 className="text-xl font-bold text-gray-800 mb-2">
+          No Transactions Yet
+        </h2>
+
+        <p className="text-sm text-gray-500 max-w-sm leading-relaxed">
+          Start adding your income and expenses to track your financial activity and visualize your savings progress.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-6">
 
-      {/* Header */}
       <div className="mb-6">
         <h2 className="text-2xl font-bold text-gray-800">
           Financial Overview
@@ -45,15 +69,22 @@ const FinanceOverview = ({
       </div>
 
       <div className="grid grid-cols-2 gap-4 mb-6">
+
         <div className="bg-gray-50 p-4 rounded-xl">
-          <p className="text-sm text-gray-500">Income</p>
+          <p className="text-sm text-gray-500">
+            Income
+          </p>
+
           <p className="text-lg font-bold text-gray-800">
             Rs. {totalIncome}
           </p>
         </div>
 
         <div className="bg-gray-50 p-4 rounded-xl">
-          <p className="text-sm text-gray-500">Savings Rate</p>
+          <p className="text-sm text-gray-500">
+            Savings Rate
+          </p>
+
           <p className="text-lg font-bold text-green-600">
             {savingsRate}%
           </p>
@@ -75,7 +106,9 @@ const FinanceOverview = ({
               key={item.label}
               className="flex items-center gap-2 bg-gray-50 px-3 py-2 rounded-xl border border-gray-100"
             >
-              <div className={`w-3 h-3 rounded-full ${item.color}`} />
+              <div
+                className={`w-3 h-3 rounded-full ${item.color}`}
+              />
               <span className="text-sm text-gray-700 font-medium">
                 {item.label}
               </span>

@@ -1,5 +1,4 @@
 import CustomTooltip from "./CustomTooltip";
-
 import {
   PieChart,
   Pie,

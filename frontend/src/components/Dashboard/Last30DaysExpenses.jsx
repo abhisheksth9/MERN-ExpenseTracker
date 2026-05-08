@@ -23,7 +23,7 @@ const Last30DaysExpenses = ({ data = [] }) => {
     return (
       <div className="card col-span-1 p-8 text-center border border-dashed border-gray-300 rounded-2xl bg-gray-50">
         <div className="flex flex-col items-center gap-2">
-          <div className="text-4xl">📉</div>
+          <div className="text-4xl"></div>
           <h3 className="text-lg font-semibold text-gray-700">
             No Expense Data
           </h3>
@@ -74,7 +74,6 @@ const Last30DaysExpenses = ({ data = [] }) => {
         </div>
       </div>
 
-      {/* Chart */}
       <div className="mt-4">
         <CustomBarChart data={chartData} />
       </div>

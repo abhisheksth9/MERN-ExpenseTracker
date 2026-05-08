@@ -10,49 +10,60 @@ import {
   FaPlane,
   FaFileInvoiceDollar,
   FaHome,
+  FaShoppingBag,
+  FaSyncAlt, 
 } from "react-icons/fa";
-
 import moment from "moment";
 
 const ExpenseList = ({ transactions, onDelete, onDownload }) => {
   const [categoryFilter, setCategoryFilter] = useState("All");
 
-  // Filter Transactions
-  const filteredTransactions = transactions?.filter((expense) => {
-    if (categoryFilter === "All") return true;
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
-    return expense.category === categoryFilter;
+  const filteredTransactions = transactions?.filter((expense) => {
+    const matchesCategory =
+      categoryFilter === "All" ||
+      expense.category === categoryFilter;
+
+    let matchesDate = true;
+
+    if (startDate && endDate) {
+      matchesDate = moment(expense.date).isBetween(
+        moment(startDate).startOf("day"),
+        moment(endDate).endOf("day"),
+        undefined,
+        "[]"
+      );
+    }
+
+    return matchesCategory && matchesDate;
   });
 
   const getCategoryIcon = (category) => {
     switch (category) {
       case "Food":
         return <FaUtensils />;
-
       case "Groceries":
         return <FaShoppingCart />;
-
       case "Transport":
         return <FaBus />;
-
       case "Entertainment":
         return <FaFilm />;
-
       case "Healthcare":
         return <FaHeartbeat />;
-
       case "Education":
         return <FaGraduationCap />;
-
       case "Travel":
         return <FaPlane />;
-
       case "Bills":
         return <FaFileInvoiceDollar />;
-
       case "Rent":
         return <FaHome />;
-
+      case "Shopping":
+        return <FaShoppingBag />;
+      case "Subscriptions":
+        return <FaSyncAlt />;
       default:
         return <FaShoppingCart />;
     }
@@ -104,10 +115,6 @@ const ExpenseList = ({ transactions, onDelete, onDownload }) => {
           <h3 className="text-xl font-semibold text-gray-700">
             No Expenses Found
           </h3>
-
-          <p className="text-gray-500 mt-2 text-sm">
-            No expenses available for this category.
-          </p>
         </div>
       )}
 

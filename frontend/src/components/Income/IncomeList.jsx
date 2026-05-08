@@ -43,7 +43,7 @@ const IncomeList = ({ transactions, onDelete, onDownload }) => {
 
   return (
     <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-6">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
         <div>
           <h2 className="text-2xl font-bold text-gray-800">
             Income History
@@ -87,15 +87,10 @@ const IncomeList = ({ transactions, onDelete, onDownload }) => {
           <h3 className="text-xl font-semibold text-gray-700">
             No Income Added
           </h3>
-
-          <p className="text-gray-500 mt-2 text-sm">
-            Your income transactions will appear here.
-          </p>
         </div>
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-
         {filteredTransactions?.map((income) => (
           <div
             key={income._id}

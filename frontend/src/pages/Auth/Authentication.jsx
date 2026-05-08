@@ -8,11 +8,7 @@ export default function Authentication() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#f6f5f7]">
-      <h2 className="text-2xl font-bold mb-6">Authentication Page</h2>
-
-      <div className="relative w-[900px] max-w-full min-h-[600px] bg-white rounded-xl shadow-2xl overflow-hidden">
-        
-        {/* Sign In */}
+      <div className="relative w-[900px] max-w-full min-h-[600px] bg-white rounded-xl shadow-2xl overflow-hidden">        
         <div
           className={`absolute top-0 left-0 w-1/2 h-full flex items-center justify-center
           transition-all duration-700
@@ -24,7 +20,6 @@ export default function Authentication() {
           <SignIn />
         </div>
 
-        {/* Sign Up */}
         <div
           className={`absolute top-0 left-0 w-1/2 h-full flex items-center justify-center
           transition-all duration-700
@@ -36,7 +31,6 @@ export default function Authentication() {
           <SignUp />
         </div>
 
-        {/* Overlay Container */}
         <div
           className={`absolute top-0 left-1/2 w-1/2 h-full overflow-hidden z-30
           transition-transform duration-700
@@ -47,7 +41,6 @@ export default function Authentication() {
             transition-transform duration-700
             ${isSignUp ? "translate-x-1/2" : ""}`}
           >
-            {/* Left Overlay */}
             <div className="w-1/2 flex flex-col items-center justify-center px-10 text-center bg-gradient-to-r from-[#A855F7] to-[#7C3AED] text-white">
               <h1 className="text-3xl font-bold mb-4">Welcome Back!</h1>
               <p className="text-sm mb-6">
@@ -61,7 +54,6 @@ export default function Authentication() {
               </button>
             </div>
 
-            {/* Right Overlay */}
             <div className="w-1/2 flex flex-col items-center justify-center px-10 text-center bg-gradient-to-r from-[#A855F7] to-[#7C3AED] text-white">
               <h1 className="text-3xl font-bold mb-4">Hello, Friend!</h1>
               <p className="text-sm mb-6">

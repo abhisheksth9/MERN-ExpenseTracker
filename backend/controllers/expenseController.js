@@ -4,9 +4,9 @@ const Expense = require("../models/Expense");
 exports.addExpense = async (req, res) => {
     const userId = req.user.id;
     try {
-        const {icon, category, amount, date} = req.body;
+        const {icon, description, category, amount, date} = req.body;
 
-        if (!category || !amount || !date) {
+        if (!category || !description || !amount || !date) {
             return res.status(400).json({message: "All fields are required"});
         }
 
@@ -14,6 +14,7 @@ exports.addExpense = async (req, res) => {
             userId,
             icon,
             category,
+            description,
             amount,
             date: new Date(date)
         });
