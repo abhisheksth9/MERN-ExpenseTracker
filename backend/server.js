@@ -12,7 +12,7 @@ const app = express();
 
 app.use(
     cors({
-        origin: 'https://mern-expense-tracker-5n0o.onrender.com',
+        origin: "https://mern-expense-tracker-nz75.vercel.app",
         methods: ["GET", "POST", "PUT", "DELETE"],
         allowedHeaders: ["Content-Type", "Authorization"],
     })
