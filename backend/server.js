@@ -12,7 +12,7 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://mern-expense-tracker-nz75.vercel.app",
+  "https://mern-expense-tracker-self.vercel.app",
 ];
 
 app.use(
